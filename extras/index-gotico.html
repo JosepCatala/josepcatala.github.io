@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070707">
+
+    <!-- SEO Básico -->
+    <title>Josep Català | Escritor de Terror y Suspenso Psicológico</title>
+    <meta name="description" content="Sitio oficial de Josep Català, autor de 'Padres de Pesadillas', 'Hijos del Miedo' y 'Pasadizos de la Memoria'. Explora el abismo del terror gótico y psicológico.">
+    <meta name="keywords" content="Josep Català, escritor de terror, Padres de Pesadillas, Hijos del miedo, terror psicológico, literatura gótica, historias de miedo, libros de suspenso, Tinta y Terror">
+    <meta name="author" content="Josep Català">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.josepcatala.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.josepcatala.com/">
+    <meta property="og:title" content="Josep Català | Escritor de Tinta y Terror">
+    <meta property="og:description" content="Descubre las obras de Josep Català. Un viaje a través de los miedos más profundos de la mente humana.">
+    <meta property="og:image" content="https://images.squidge.org/images/2026/05/05/Image-14-mar-2026-21_49_13.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.josepcatala.com/">
+    <meta property="twitter:title" content="Josep Català | Escritor de Tinta y Terror">
+    <meta property="twitter:description" content="Explora el catálogo de libros de terror de Josep Català.">
+    <meta property="twitter:image" content="https://images.squidge.org/images/2026/05/05/Image-14-mar-2026-21_49_13.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --bg-dark:#070707; --accent-blood:#9b1c1c; --text-silver:#d1d5db; }
+        html { scroll-padding-top: 80px; }
+        body { font-family:'Montserrat',sans-serif; background:var(--bg-dark); color:var(--text-silver); overflow-x:hidden; }
+        h1,h2,h3,.font-manuscript { font-family:'Caveat',cursive; }
+        .font-serif-gothic { font-family:'Cinzel',serif; }
+        :focus-visible { outline:2px solid #dc2626; outline-offset:3px; }
+
+        /* Grano de película (inline, sin peticiones externas) */
+        .film-grain::before {
+            content:""; position:fixed; inset:0; pointer-events:none; z-index:50; opacity:.07;
+            background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
+
+        /* Brasas flotantes + barra de progreso */
+        #embers { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:2; }
+        #progress { position:fixed; top:0; left:0; height:2px; width:100%; background:var(--accent-blood); transform:scaleX(0); transform-origin:left; z-index:70; box-shadow:0 0 10px #9b1c1c; }
+
+        /* HERO: nombre escrito con tinta + linterna que sigue al cursor */
+        .hero-lit {
+            position:absolute; inset:0; z-index:0; opacity:.7;
+            background:url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000') center/cover;
+            -webkit-mask-image:radial-gradient(circle var(--lr,220px) at var(--mx,50%) var(--my,40%), #000 0%, transparent 100%);
+                    mask-image:radial-gradient(circle var(--lr,220px) at var(--mx,50%) var(--my,40%), #000 0%, transparent 100%);
+        }
+        .ch { display:inline-block; opacity:0; filter:blur(14px); transform:translateY(14px) scale(1.1); animation:ink 1.4s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:calc(var(--i) * 80ms + 300ms); }
+        .ch.flick { animation:none; opacity:.25; filter:none; transform:none; transition:opacity .08s; }
+        @keyframes ink { to { opacity:1; filter:blur(0); transform:none; } }
+        .glow-name { text-shadow:0 0 30px rgba(155,28,28,.35); animation:candle 4s ease-in-out infinite; }
+        @keyframes candle { 0%,100%{text-shadow:0 0 30px rgba(155,28,28,.30)} 40%{text-shadow:0 0 44px rgba(155,28,28,.55)} 60%{text-shadow:0 0 26px rgba(155,28,28,.25)} }
+        #typed::after { content:''; display:inline-block; width:2px; height:1.1em; margin-left:4px; background:var(--accent-blood); vertical-align:-.15em; animation:blink 1s steps(1) infinite; }
+        @keyframes blink { 50% { opacity:0; } }
+        .scroll-cue { width:1px; height:56px; background:linear-gradient(#9b1c1c,transparent); animation:cue 2.2s ease-in-out infinite; transform-origin:top; }
+        @keyframes cue { 0%{transform:scaleY(0);opacity:1} 70%{transform:scaleY(1);opacity:1} 100%{transform:scaleY(1);opacity:0} }
+
+        /* Revelados al hacer scroll */
+        .reveal { opacity:0; transform:translateY(40px); transition:opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); }
+        .reveal.active { opacity:1; transform:none; }
+        .ink-wipe { clip-path:inset(0 0 100% 0); transition:clip-path 1.6s cubic-bezier(.6,.1,.2,1) .2s; }
+        .reveal.active .ink-wipe { clip-path:inset(0); }
+
+        /* Tarjetas con inclinación 3D */
+        .book-card {
+            position:relative; display:flex; flex-direction:column; height:100%;
+            background:rgba(15,15,15,.8); border:1px solid rgba(255,255,255,.05); filter:grayscale(.5);
+            transform:perspective(900px) translateY(var(--ty,0)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+            transition:transform .25s ease-out, filter .5s, border-color .5s;
+        }
+        .book-card::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(155,28,28,.22), transparent 55%); }
+        .book-card:hover, .book-card:focus-visible { --ty:-10px; filter:grayscale(0); border-color:var(--accent-blood); }
+        .book-card:hover::after { opacity:1; }
+        .read-hint { font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:#9ca3af; margin-top:auto; transition:color .3s, letter-spacing .3s; }
+        .book-card:hover .read-hint { color:#fff; letter-spacing:.4em; }
+
+        .blood-link { position:relative; display:inline-block; cursor:pointer; transition:color .3s; }
+        .blood-link::after { content:''; position:absolute; width:0; height:1px; bottom:-2px; left:0; background:var(--accent-blood); transition:width .3s ease; }
+        .blood-link:hover::after, .blood-link.is-active::after { width:100%; }
+        .blood-link.is-active { color:#fff; }
+
+        .btn-gothic { border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.02); transition:all .3s ease; cursor:pointer; }
+        .btn-gothic:hover { border-color:var(--accent-blood); background:rgba(155,28,28,.1); color:#fff; letter-spacing:.1em; }
+        .star-rating { color:#facc15; }
+
+        /* Vistas de libros */
+        .book-view { display:none; }
+        .book-view.active { display:block; animation:viewIn .9s cubic-bezier(.2,.8,.2,1); }
+        @keyframes viewIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+        .main-content.hidden { display:none; }
+        .cover-wrap { position:relative; }
+        .cover-wrap::before { content:''; position:absolute; inset:-12%; background:radial-gradient(circle, rgba(155,28,28,.35), transparent 65%); filter:blur(30px); animation:pulse 5s ease-in-out infinite; }
+        .cover-wrap img { position:relative; animation:float 7s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0) rotate(-.4deg)} 50%{transform:translateY(-10px) rotate(.4deg)} }
+        @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+        #mobile-menu { display:none; }
+        #mobile-menu.open { display:flex; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation:none !important; transition-duration:.01ms !important; }
+            .ch { opacity:1; filter:none; transform:none; }
+            .reveal { opacity:1; transform:none; }
+            .ink-wipe { clip-path:none; }
+        }
+    </style>
+</head>
+<body class="film-grain antialiased">
+
+    <div id="progress" aria-hidden="true"></div>
+    <canvas id="embers" aria-hidden="true"></canvas>
+
+    <!-- Barra de Navegación -->
+    <nav id="navbar" class="fixed w-full z-[55] transition-all duration-700 h-24 flex items-center bg-black/50 backdrop-blur-sm border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-8 w-full flex justify-between items-center">
+            <a href="#inicio" class="font-serif-gothic text-xl tracking-[0.3em] text-white">JOSEP CATALÀ</a>
+
+            <div class="hidden md:flex space-x-10 text-[10px] tracking-[0.4em] uppercase font-semibold">
+                <a href="#inicio" data-nav="inicio" class="blood-link text-gray-300">Inicio</a>
+                <a href="#biografia" data-nav="biografia" class="blood-link text-gray-300">El Autor</a>
+                <a href="#libros" data-nav="libros" class="blood-link text-gray-300">Libros</a>
+                <a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="text-red-700 hover:text-red-500 transition-colors font-bold tracking-widest">Tienda Amazon</a>
+            </div>
+
+            <button aria-label="Abrir menú" class="md:hidden text-white p-2" onclick="toggleMenu(true)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Menú Móvil -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black z-[60] flex-col items-center justify-center space-y-8 text-3xl font-manuscript text-white text-center">
+        <button aria-label="Cerrar menú" class="absolute top-8 right-8 p-4 text-3xl" onclick="toggleMenu(false)">✕</button>
+        <a href="#inicio" class="block">Inicio</a>
+        <a href="#biografia" class="block">El Autor</a>
+        <a href="#libros" class="block">Libros</a>
+        <a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="text-red-700">Tienda Amazon</a>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="main-content" class="main-content">
+        <!-- Hero -->
+        <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000" alt="" class="w-full h-full object-cover opacity-20">
+                <div class="hero-lit"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#070707] via-transparent to-[#070707]"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-6">
+                <p class="font-serif-gothic text-xs tracking-[0.8em] text-red-800 mb-6 uppercase font-bold">Explorador del Abismo Literario</p>
+                <h1 id="hero-name" class="glow-name text-7xl md:text-9xl text-white mb-6">Josep Català</h1>
+                <p id="typed" class="max-w-2xl mx-auto min-h-[7.5rem] md:min-h-[5.5rem] text-gray-400 font-light text-lg italic tracking-wide leading-relaxed" aria-label="No escribo para que duermas, sino para que despiertes en el lugar donde los monstruos tienen nombre propio.">"No escribo para que duermas, sino para que despiertes en el lugar donde los monstruos tienen nombre propio."</p>
+                <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-6">
+                    <a href="#libros" class="btn-gothic px-10 py-4 text-[10px] tracking-[0.3em] uppercase">Explorar Manuscritos</a>
+                    <a href="#biografia" class="text-[10px] tracking-[0.3em] uppercase border-b border-red-900 pb-1 hover:text-white transition-colors">La Pluma tras el Velo</a>
+                </div>
+            </div>
+            <div class="scroll-cue absolute bottom-8 left-1/2" aria-hidden="true"></div>
+        </section>
+
+        <!-- Biografía -->
+        <section id="biografia" class="py-32 relative">
+            <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <div class="relative group">
+                        <div class="absolute -inset-4 border border-red-900/30 transition-all group-hover:scale-105"></div>
+                        <img src="https://images.squidge.org/images/2026/05/05/Image-14-mar-2026-21_49_13.png" alt="Fotografía de Josep Català" loading="lazy" class="ink-wipe relative z-10 w-full grayscale contrast-125 brightness-90 shadow-2xl transition duration-700 group-hover:grayscale-0 group-hover:brightness-100">
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h2 class="font-serif-gothic text-3xl mb-8 tracking-widest text-white">La Pluma <span class="text-red-900">&</span> el Velo</h2>
+                    <div class="space-y-6 text-gray-400 leading-relaxed text-justify font-light">
+                        <p>Josep Català no busca el susto fácil, sino la inquietud persistente. Afincado en la intersección entre lo gótico clásico y el horror psicológico contemporáneo, su escritura es un bisturí que disecciona la fragilidad humana.</p>
+                        <p>Con su obra, Català rinde homenaje a los maestros que le precedieron, no solo narrando sus vidas, sino convirtiendo sus propias obsesiones en carne de ficción.</p>
+                        <p class="font-manuscript text-4xl text-gray-300 mt-8">"Escribir es sacrificar una parte de la cordura para salvar el resto."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo -->
+        <section id="libros" class="py-32 bg-zinc-950/30">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="text-center mb-24 reveal">
+                    <h2 class="font-serif-gothic text-4xl text-white tracking-[0.3em] mb-4 uppercase">Catálogo</h2>
+                    <div class="w-24 h-1 bg-red-900 mx-auto opacity-40"></div>
+                    <p class="mt-4 text-xs text-gray-500 tracking-[0.2em]">Elige una obra para leer su sinopsis</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="reveal">
+                        <a href="#libro1" class="book-card tilt p-6 rounded-sm group" aria-label="Ver Padres de Pesadillas">
+                            <div class="aspect-[2/3] mb-8 overflow-hidden bg-zinc-900 shadow-2xl">
+                                <img src="https://images.squidge.org/images/2026/04/08/Sin-titulo-1.md.jpg" alt="Portada de Padres de Pesadillas" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-manuscript text-4xl text-white mb-2">Padres de Pesadillas</h3>
+                            <div class="star-rating text-[10px] mb-4" aria-label="5 de 5 estrellas">★★★★★</div>
+                            <p class="text-[10px] tracking-widest text-red-900 uppercase font-bold mb-6">Vol. 1: Tinta y Terror</p>
+                            <span class="read-hint">Leer sinopsis</span>
+                        </a>
+                    </div>
+                    <div class="reveal" style="transition-delay:.1s">
+                        <a href="#libro2" class="book-card tilt p-6 rounded-sm group" aria-label="Ver Hijos del miedo">
+                            <div class="aspect-[2/3] mb-8 overflow-hidden bg-zinc-900 shadow-2xl">
+                                <img src="https://images.squidge.org/images/2026/05/05/Sin-titulo-1.jpg" alt="Portada de Hijos del miedo" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-manuscript text-4xl text-white mb-2">Hijos del miedo</h3>
+                            <div class="star-rating text-[10px] mb-4" aria-label="5 de 5 estrellas">★★★★★</div>
+                            <p class="text-[10px] tracking-widest text-red-900 uppercase font-bold mb-6">Relatos de Inquietud</p>
+                            <span class="read-hint">Leer sinopsis</span>
+                        </a>
+                    </div>
+                    <div class="reveal" style="transition-delay:.2s">
+                        <a href="#libro3" class="book-card tilt p-6 rounded-sm group" aria-label="Ver Pasadizos de la memoria">
+                            <div class="aspect-[2/3] mb-8 overflow-hidden bg-zinc-900 shadow-2xl">
+                                <img src="https://images.squidge.org/images/2026/05/05/Portada2.jpg" alt="Portada de Los pasadizos de la memoria" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-manuscript text-4xl text-white mb-2">Pasadizos de la memoria</h3>
+                            <div class="star-rating text-[10px] mb-4" aria-label="4 de 5 estrellas">★★★★☆</div>
+                            <p class="text-[10px] tracking-widest text-red-900 uppercase font-bold mb-6">Terror Psicológico</p>
+                            <span class="read-hint">Leer sinopsis</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- LIBRO 1 -->
+    <section id="view-libro1" class="book-view py-32 min-h-screen relative z-10">
+        <div class="max-w-5xl mx-auto px-8">
+            <a href="#libros" class="text-[10px] tracking-widest uppercase text-gray-500 hover:text-red-700 mb-12 inline-flex items-center pt-8">← Volver al catálogo</a>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="cover-wrap self-start"><img src="https://images.squidge.org/images/2026/04/08/Sin-titulo-1.md.jpg" alt="Portada de Padres de Pesadillas" class="w-full shadow-2xl border border-white/5"></div>
+                <div>
+                    <h2 class="font-manuscript text-6xl text-white mb-4">Padres de Pesadillas</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="star-rating text-lg">★★★★★</div>
+                        <span class="text-xs text-gray-500">Amazon Best Seller</span>
+                    </div>
+                    <div class="space-y-6 text-gray-400 font-light leading-relaxed text-justify">
+                        <p class="text-red-900 font-bold uppercase tracking-widest text-[10px]">Sinopsis</p>
+                        <p>Mezcla terror gótico, ficción histórica y metaliteratura para plantear una idea inquietante: ¿y si los grandes autores del terror no hubieran inventado sus historias, sino que hubieran entrado en contacto con algo… y simplemente actuado como intermediarios?</p>
+                        <p>A través de distintos relatos, el libro nos presenta a figuras como <strong>Bram Stoker, Edgar Allan Poe, Emily Brontë, Heinrich von Kleist y Oscar Wilde</strong>, mostrando sus vidas desde una perspectiva oscura, donde la creación artística no es inspiración, sino pacto, obsesión, culpa, deseo de trascender y, en muchos casos, una forma de autodestrucción.</p>
+                        <p>Uno de los puntos más fuertes del libro es su ambientación. La atmósfera gótica está magistralmente construida: la niebla de Whitby, los acantilados, los cementerios, las casas antiguas y la sensación constante de que hay algo observando desde la oscuridad.</p>
+                    </div>
+                    <div class="mt-12"><a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="btn-gothic block text-center py-4 text-xs tracking-widest uppercase">Ver en Amazon</a></div>
+                </div>
+            </div>
+            <nav class="book-nav mt-24 pt-8 border-t border-white/5 flex justify-between gap-6 text-[10px] tracking-widest uppercase text-gray-500" aria-label="Otras obras"></nav>
+        </div>
+    </section>
+
+    <!-- LIBRO 2 -->
+    <section id="view-libro2" class="book-view py-32 min-h-screen relative z-10">
+        <div class="max-w-5xl mx-auto px-8">
+            <a href="#libros" class="text-[10px] tracking-widest uppercase text-gray-500 hover:text-red-700 mb-12 inline-flex items-center pt-8">← Volver al catálogo</a>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="cover-wrap self-start"><img src="https://images.squidge.org/images/2026/05/05/Sin-titulo-1.jpg" alt="Portada de Hijos del miedo" class="w-full shadow-2xl border border-white/5"></div>
+                <div>
+                    <h2 class="font-manuscript text-6xl text-white mb-4">Hijos del miedo</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="star-rating text-lg">★★★★★</div>
+                        <span class="text-xs text-gray-500">Valoración en Amazon</span>
+                    </div>
+                    <div class="space-y-6 text-gray-400 font-light leading-relaxed text-justify">
+                        <p class="text-red-900 font-bold uppercase tracking-widest text-[10px]">Sinopsis</p>
+                        <p>Si te gusta el terror psicológico y las historias que te dejan pensando, este libro es para ti. En <strong>Hijos del miedo (Tinta y Terror Vol. II)</strong>, Josep Català reúne una colección de historias cortas donde lo oscuro y lo desconocido se mezclan con lo cotidiano.</p>
+                        <p>Cada relato está diseñado para provocar tensión, incomodidad y esa sensación que no te abandona al apagar la luz. A través de una atmósfera envolvente y perturbadora, el autor explora los miedos más profundos de la mente humana, forzándote a enfrentar lo que se esconde en las sombras.</p>
+                        <div class="bg-white/5 p-4 border-l-2 border-red-900 space-y-2 my-6">
+                            <p class="text-xs text-gray-300">✔ Ideal para amantes del terror psicológico intenso.</p>
+                            <p class="text-xs text-gray-300">✔ Perfecto para fans de historias oscuras y perturbadoras.</p>
+                            <p class="text-xs text-gray-300">✔ Una lectura adictiva, rápida y difícil de olvidar.</p>
+                        </div>
+                        <p class="italic text-white">"Un libro que engancha al lector y se queda grabado en la memoria."</p>
+                    </div>
+                    <div class="mt-12"><a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="btn-gothic block text-center py-4 text-xs tracking-widest uppercase">Ver en Amazon</a></div>
+                </div>
+            </div>
+            <nav class="book-nav mt-24 pt-8 border-t border-white/5 flex justify-between gap-6 text-[10px] tracking-widest uppercase text-gray-500" aria-label="Otras obras"></nav>
+        </div>
+    </section>
+
+    <!-- LIBRO 3 -->
+    <section id="view-libro3" class="book-view py-32 min-h-screen relative z-10">
+        <div class="max-w-5xl mx-auto px-8">
+            <a href="#libros" class="text-[10px] tracking-widest uppercase text-gray-500 hover:text-red-700 mb-12 inline-flex items-center pt-8">← Volver al catálogo</a>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="cover-wrap self-start"><img src="https://images.squidge.org/images/2026/05/05/Portada2.jpg" alt="Portada de Los pasadizos de la memoria" class="w-full shadow-2xl border border-white/5"></div>
+                <div>
+                    <h2 class="font-manuscript text-6xl text-white mb-4">Pasadizos de la memoria</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="star-rating text-lg">★★★★☆</div>
+                        <span class="text-xs text-gray-500">Valoración en Amazon</span>
+                    </div>
+                    <div class="space-y-6 text-gray-400 font-light leading-relaxed text-justify">
+                        <p class="text-red-900 font-bold uppercase tracking-widest text-[10px]">Sinopsis</p>
+                        <p>La Dra. Ágatha Ugarte ha construido su vida bajo un rigor inquebrantable, pero una pérdida y una llamada inesperada la obligan a romper con todo. Su tía ha desaparecido, y la única pista la arrastra hacia Arcalan, un misterioso pueblo que parece sacado de sus peores pesadillas.</p>
+                        <p>"Los Pasadizos de la Memoria" es un thriller que entrelaza dos épocas, donde la arqueología del alma se confunde con la conspiración histórica. Una historia sobre la fuerza de la sangre, los sacrificios que forjaron nuestro presente y el aterrador descubrimiento de que tu destino no es un futuro incierto, sino un eco que siempre ha estado esperando, latente, en tu propia mente.</p>
+                        <p class="italic text-white border-l-2 border-red-900 pl-4 py-2 bg-white/5">"La verdad tiene un precio. ¿Te atreves a descender a los pasadizos donde la memoria se confunde con la obsesión... y la única luz se encuentra bajo tierra?"</p>
+                    </div>
+                    <div class="mt-12"><a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="btn-gothic block text-center py-4 text-xs tracking-widest uppercase">Ver en Amazon</a></div>
+                </div>
+            </div>
+            <nav class="book-nav mt-24 pt-8 border-t border-white/5 flex justify-between gap-6 text-[10px] tracking-widest uppercase text-gray-500" aria-label="Otras obras"></nav>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 bg-black border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-[9px] tracking-[0.5em] text-gray-600 uppercase">
+            <div class="mb-8 md:mb-0 text-center md:text-left">© 2026 JOSEP CATALÀ | ESCRITOR</div>
+            <div class="flex space-x-8">
+                <a href="https://www.amazon.es/stores/JOSEP-CATAL%C3%80/author/B0G11NK3RM" target="_blank" rel="noopener" class="hover:text-red-900 transition-colors">Tienda Oficial</a>
+                <a href="#inicio" class="text-gray-400">Inicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        const $ = (s, c = document) => c.querySelector(s);
+        const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const main = $('#main-content');
+        const views = $$('.book-view');
+        const homeTitle = document.title;
+        let onMain = true;
+
+        /* ---------- Menú móvil ---------- */
+        window.toggleMenu = function (show) {
+            $('#mobile-menu').classList.toggle('open', show);
+            document.body.style.overflow = show ? 'hidden' : '';
+        };
+        $$('#mobile-menu a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+        /* ---------- Navegación por hash (el botón "atrás" funciona y se puede compartir cada libro) ---------- */
+        function route() {
+            const id = location.hash.slice(1);
+            const view = /^libro\d+$/.test(id) ? $('#view-' + id) : null;
+            if (view) {
+                main.classList.add('hidden');
+                views.forEach(v => v.classList.toggle('active', v === view));
+                document.title = $('h2', view).textContent + ' | Josep Català';
+                window.scrollTo(0, 0);
+                onMain = false;
+                return;
+            }
+            views.forEach(v => v.classList.remove('active'));
+            document.title = homeTitle;
+            const wasHidden = !onMain;
+            main.classList.remove('hidden');
+            onMain = true;
+            if (wasHidden) {
+                const t = id && document.getElementById(id);
+                t ? t.scrollIntoView({ behavior: 'auto' }) : window.scrollTo(0, 0);
+                $$('.reveal').forEach(el => el.classList.add('active'));
+            }
+        }
+        window.addEventListener('hashchange', route);
+        route();
+
+        /* Anterior / siguiente obra al final de cada ficha */
+        const titles = views.map(v => ({ id: v.id.replace('view-', ''), title: $('h2', v).textContent }));
+        views.forEach((v, i) => {
+            const p = titles[(i + titles.length - 1) % titles.length], n = titles[(i + 1) % titles.length];
+            $('.book-nav', v).innerHTML =
+                `<a href="#${p.id}" class="blood-link hover:text-white">← ${p.title}</a><a href="#${n.id}" class="blood-link hover:text-white text-right">${n.title} →</a>`;
+        });
+
+        /* ---------- Barra de progreso, navbar y sección activa ---------- */
+        const bar = $('#progress'), nav = $('#navbar');
+        function onScroll() {
+            const max = document.documentElement.scrollHeight - innerHeight;
+            bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+            const solid = scrollY > 50;
+            nav.classList.toggle('bg-black/95', solid);
+            nav.classList.toggle('h-20', solid);
+            nav.classList.toggle('h-24', !solid);
+        }
+        addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        const spy = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) $$('[data-nav]').forEach(a => a.classList.toggle('is-active', a.dataset.nav === e.target.id));
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        $$('#inicio, #biografia, #libros').forEach(s => spy.observe(s));
+
+        /* ---------- Revelados al hacer scroll ---------- */
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); }
+        }), { threshold: 0.1 });
+        $$('.reveal').forEach(el => io.observe(el));
+
+        /* ---------- Nombre escrito con tinta ---------- */
+        const h1 = $('#hero-name');
+        const name = h1.textContent;
+        if (!reduced) {
+            h1.setAttribute('aria-label', name);
+            h1.innerHTML = [...name].map((c, i) =>
+                c === ' ' ? ' ' : `<span class="ch" aria-hidden="true" style="--i:${i}">${c}</span>`).join('');
+            setTimeout(() => setInterval(() => {
+                const cs = $$('.ch', h1), c = cs[Math.floor(Math.random() * cs.length)];
+                if (!c) return;
+                c.classList.add('flick');
+                setTimeout(() => c.classList.remove('flick'), 140);
+            }, 3200), 3000);
+        }
+
+        /* ---------- Frases que se escriben solas ---------- */
+        const typed = $('#typed');
+        const phrases = [
+            '"No escribo para que duermas, sino para que despiertes en el lugar donde los monstruos tienen nombre propio."',
+            '"Escribir es sacrificar una parte de la cordura para salvar el resto."',
+            '"La verdad tiene un precio. ¿Te atreves a descender a los pasadizos donde la memoria se confunde con la obsesión... y la única luz se encuentra bajo tierra?"'
+        ];
+        if (!reduced) {
+            let pi = 0, ci = 0, del = false;
+            (function tick() {
+                const p = phrases[pi];
+                ci += del ? -2 : 1;
+                typed.textContent = p.slice(0, Math.max(ci, 0));
+                let wait = del ? 14 : 38;
+                if (!del && ci >= p.length) { del = true; wait = 3800; }
+                else if (del && ci <= 0) { del = false; pi = (pi + 1) % phrases.length; wait = 500; }
+                setTimeout(tick, wait);
+            })();
+            typed.textContent = '';
+        }
+
+        /* ---------- Tarjetas 3D ---------- */
+        $$('.tilt').forEach(card => {
+            card.addEventListener('pointermove', e => {
+                if (e.pointerType !== 'mouse' || reduced) return;
+                const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+                card.style.setProperty('--ry', ((x - .5) * 10) + 'deg');
+                card.style.setProperty('--rx', ((.5 - y) * 8) + 'deg');
+                card.style.setProperty('--gx', (x * 100) + '%');
+                card.style.setProperty('--gy', (y * 100) + '%');
+            });
+            card.addEventListener('pointerleave', () => { card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg'); });
+        });
+
+        /* ---------- Brasas + linterna del hero ---------- */
+        if (reduced) { $('#embers').remove(); return; }
+        const cv = $('#embers'), ctx = cv.getContext('2d'), hero = $('#inicio'), lit = $('.hero-lit');
+        let W, H, dpr, parts = [], mx = 0, my = 0, lastMove = -1e9, lx = 0, ly = 0;
+
+        function resize() {
+            dpr = Math.min(devicePixelRatio || 1, 2);
+            W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr;
+            const n = innerWidth < 700 ? 25 : 55;
+            parts = Array.from({ length: n }, () => spawn(true));
+        }
+        function spawn(anywhere) {
+            return {
+                x: Math.random() * W, y: anywhere ? Math.random() * H : H + 10,
+                r: (Math.random() * 1.6 + .5) * dpr, vy: (Math.random() * .35 + .12) * dpr,
+                ph: Math.random() * 6.28, a: Math.random() * .45 + .1, red: Math.random() < .45
+            };
+        }
+        addEventListener('resize', resize);
+        addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; lastMove = performance.now(); });
+        resize();
+
+        (function frame(t) {
+            if (!document.hidden) {
+                ctx.clearRect(0, 0, W, H);
+                for (const p of parts) {
+                    p.y -= p.vy; p.x += Math.sin(t / 1400 + p.ph) * .35 * dpr;
+                    if (p.y < -10) Object.assign(p, spawn(false));
+                    const fade = Math.min(1, (p.y / H) * 2.2);
+                    ctx.fillStyle = p.red ? `rgba(220,70,50,${p.a * fade})` : `rgba(209,213,219,${p.a * .6 * fade})`;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+                }
+                const r = hero.getBoundingClientRect();
+                if (r.height > 0 && r.bottom > 0) {
+                    const live = t - lastMove < 2500;
+                    const tx = live ? mx - r.left : r.width * (.5 + .3 * Math.sin(t / 2200));
+                    const ty = live ? my - r.top : r.height * (.45 + .2 * Math.cos(t / 3100));
+                    lx += (tx - lx) * .08; ly += (ty - ly) * .08;
+                    lit.style.setProperty('--mx', lx + 'px');
+                    lit.style.setProperty('--my', ly + 'px');
+                    lit.style.setProperty('--lr', (210 + 18 * Math.sin(t / 130) * Math.sin(t / 370)) + 'px');
+                }
+            }
+            requestAnimationFrame(frame);
+        })(0);
+    })();
+    </script>
+</body>
+</html>
